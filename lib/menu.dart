@@ -4,9 +4,9 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
-    ShopItem("Lihat Produk", Icons.checklist),
-    ShopItem("Tambah Produk", Icons.add_shopping_cart),
-    ShopItem("Logout", Icons.logout),
+    ShopItem("Lihat Produk", Icons.checklist, Color.fromARGB(255, 91, 104, 176),),
+    ShopItem("Tambah Produk", Icons.add_shopping_cart, Color.fromARGB(255, 119, 125, 158),),
+    ShopItem("Logout", Icons.logout, Color.fromARGB(255, 119, 125, 158),),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -21,9 +21,10 @@ class MyHomePage extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
         return Scaffold(
+          
           appBar: AppBar(
             title: const Text(
-              'Shopping List',
+              'Roblox UGC Shop',
             ),
           ),
           body: SingleChildScrollView(
@@ -37,7 +38,7 @@ class MyHomePage extends StatelessWidget {
                     padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                     // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                     child: Text(
-                      'PBP Shop', // Text yang menandakan toko
+                      'HAE UGC Catalog', // Text yang menandakan toko
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
@@ -69,8 +70,9 @@ class MyHomePage extends StatelessWidget {
 class ShopItem {
   final String name;
   final IconData icon;
+  final Color warna;
 
-  ShopItem(this.name, this.icon);
+  ShopItem(this.name, this.icon, this.warna);
 }
 
 class ShopCard extends StatelessWidget {
@@ -81,7 +83,7 @@ class ShopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color.fromARGB(255, 94, 39, 39),
+      color: item.warna,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
