@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:roblox_ugc/widgets/left_drawer.dart';
+import 'package:roblox_ugc/screens/shoplist_form.dart';
+import 'package:roblox_ugc/widgets/shop_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -24,9 +27,13 @@ class MyHomePage extends StatelessWidget {
           
           appBar: AppBar(
             title: const Text(
-              'Roblox UGC Shop',
+              'Shopping List',
             ),
+            backgroundColor: Colors.indigo,
+            foregroundColor: Colors.white,
           ),
+          // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
+          drawer: const LeftDrawer(),
           body: SingleChildScrollView(
             // Widget wrapper yang dapat discroll
             child: Padding(
@@ -92,6 +99,12 @@ class ShopCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+
+            if (item.name == "Tambah Produk") {
+            // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ShopFormPage()));
+            }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text

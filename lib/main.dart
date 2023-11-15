@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roblox_ugc/menu.dart';
+import 'package:roblox_ugc/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
