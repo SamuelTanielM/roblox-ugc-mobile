@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 import 'package:roblox_ugc/widgets/left_drawer.dart';
-import 'package:roblox_ugc/models/product_model.dart';
+
 
 class ProductList extends StatelessWidget {
   final List<Product> productList;
 
-  const ProductList({required this.productList});
+  const ProductList({Key? key, required this.productList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class ProductList extends StatelessWidget {
       appBar: AppBar(
         title: Text('Daftar Produk'),
       ),
+      drawer: LeftDrawer(productList : productList),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Table(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:roblox_ugc/widgets/left_drawer.dart';
 import 'package:roblox_ugc/screens/shoplist_form.dart';
 import 'package:roblox_ugc/widgets/shop_card.dart';
+import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -11,6 +13,12 @@ class MyHomePage extends StatelessWidget {
     ShopItem("Tambah Produk", Icons.add_shopping_cart, Color.fromARGB(255, 119, 125, 158),),
     ShopItem("Logout", Icons.logout, Color.fromARGB(255, 119, 125, 158),),
   ];
+
+  final List<Product> productList = [];
+
+
+
+  
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -33,7 +41,7 @@ class MyHomePage extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
           // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
-          drawer: const LeftDrawer(),
+          drawer: LeftDrawer(productList : productList),
           body: SingleChildScrollView(
             // Widget wrapper yang dapat discroll
             child: Padding(
@@ -64,7 +72,7 @@ class MyHomePage extends StatelessWidget {
                     shrinkWrap: true,
                     children: items.map((ShopItem item) {
                       // Iterasi untuk setiap item
-                      return ShopCard(item);
+                      return ShopCard(item, productList: productList,);
                     }).toList(),
                   ),
                 ],
@@ -82,10 +90,12 @@ class ShopItem {
   ShopItem(this.name, this.icon, this.warna);
 }
 
+
 class ShopCard extends StatelessWidget {
   final ShopItem item;
+  final List<Product> productList;
 
-  const ShopCard(this.item, {super.key}); // Constructor
+  const ShopCard(this.item, {super.key, required this.productList}); // Constructor
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +113,14 @@ class ShopCard extends StatelessWidget {
             if (item.name == "Tambah Produk") {
             // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ShopFormPage()));
+                    MaterialPageRoute(builder: (context) => ShopFormPage(productList: productList)));
             }
+
+            if (item.name == "Lihat Produk") {
+            // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
+          }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text

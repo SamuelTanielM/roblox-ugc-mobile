@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roblox_ugc/screens/menu.dart';
+import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 
 void main() {
   runApp(const MyApp());

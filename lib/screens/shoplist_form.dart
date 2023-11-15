@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:roblox_ugc/widgets/left_drawer.dart';
+import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 // NOTE: Impor drawer yang sudah dibuat sebelumnya
 
 class ShopFormPage extends StatefulWidget {
-    const ShopFormPage({super.key});
+    final List<Product> productList;  
+    ShopFormPage({super.key, required this.productList});
 
     @override
     State<ShopFormPage> createState() => _ShopFormPageState();
@@ -33,7 +35,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
             foregroundColor: Colors.white,
           ),
           // NOTE: Tambahkan drawer yang sudah dibuat di sini
-        drawer: const LeftDrawer(),
+        drawer: LeftDrawer(productList : widget.productList),
 
         body: Form(
           key: _formKey,
@@ -126,6 +128,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
+                          Product newProduct = Product(name: _name, price: _price, description: _description);
+                          widget.productList.add(newProduct);
                           showDialog(
                             context: context,
                             builder: (context) {

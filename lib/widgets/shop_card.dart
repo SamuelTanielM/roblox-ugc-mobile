@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // Impor drawer widget
 import 'package:roblox_ugc/widgets/left_drawer.dart';
 import 'package:roblox_ugc/screens/shoplist_form.dart';
+import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 
 class ShopItem {
   final String name;
@@ -12,8 +14,9 @@ class ShopItem {
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
+  final List<Product> productList;  
 
-  const ShopCard(this.item, {super.key}); // Constructor
+  const ShopCard(this.item, {super.key, required this.productList}); // Constructor
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,13 @@ class ShopCard extends StatelessWidget {
           if (item.name == "Tambah Produk") {
             // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ShopFormPage()));
+                    MaterialPageRoute(builder: (context) => ShopFormPage(productList: productList,)));
+          }
+
+          if (item.name == "Lihat Produk") {
+            // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
           }
 
         },
