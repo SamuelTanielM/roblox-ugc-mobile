@@ -4,7 +4,7 @@ import 'package:roblox_ugc/widgets/left_drawer.dart';
 
 
 class ProductList extends StatelessWidget {
-  final List<Product> productList;
+  final List<ProductPast> productList;
 
   const ProductList({Key? key, required this.productList}) : super(key: key);
 

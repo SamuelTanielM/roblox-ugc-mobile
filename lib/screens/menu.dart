@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:roblox_ugc/widgets/left_drawer.dart';
 import 'package:roblox_ugc/screens/shoplist_form.dart';
-import 'package:roblox_ugc/widgets/shop_card.dart';
 import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/screens/list_product.dart';
+import 'package:roblox_ugc/widgets/shop_card.dart';
 import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
 
 class MyHomePage extends StatelessWidget {
@@ -14,7 +15,7 @@ class MyHomePage extends StatelessWidget {
     ShopItem("Logout", Icons.logout, Color.fromARGB(255, 119, 125, 158),),
   ];
 
-  final List<Product> productList = [];
+  final List<ProductPast> productList = [];
 
 
 
@@ -93,7 +94,7 @@ class ShopItem {
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
-  final List<Product> productList;
+  final List<ProductPast> productList;
 
   const ShopCard(this.item, {super.key, required this.productList}); // Constructor
 
@@ -120,7 +121,11 @@ class ShopCard extends StatelessWidget {
             // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
-          }
+            }
+            else if (item.name == "Lihat Produk") {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProductPage()));
+            }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text

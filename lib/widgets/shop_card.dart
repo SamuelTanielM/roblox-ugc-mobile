@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:roblox_ugc/widgets/left_drawer.dart';
 import 'package:roblox_ugc/screens/shoplist_form.dart';
 import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/screens/list_product.dart';
 import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
-
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert';
 class ShopItem {
   final String name;
   final IconData icon;
@@ -14,12 +17,13 @@ class ShopItem {
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
-  final List<Product> productList;  
+  final List<ProductPast> productList;  
 
   const ShopCard(this.item, {super.key, required this.productList}); // Constructor
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: Colors.indigo,
       child: InkWell(
@@ -42,6 +46,10 @@ class ShopCard extends StatelessWidget {
             // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
+          }
+          else if (item.name == "Lihat Produk") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProductPage()));
           }
 
         },

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:roblox_ugc/screens/menu.dart';
 import 'package:roblox_ugc/screens/shoplist_form.dart';
 import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/screens/list_product.dart';
 import 'package:roblox_ugc/models/product_model.dart'; // Import your product model\
+import 'package:roblox_ugc/models/product.dart'; // Import your product model\
 
 class LeftDrawer extends StatelessWidget {
-  final List<Product> productList;  
+  final List<ProductPast> productList;  
   const LeftDrawer({super.key, required this.productList});
 
   @override
@@ -83,6 +85,17 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Produk'),
+            onTap: () {
+                // Route menu ke halaman produk
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+                );
+            },
+        ),
         ],
       ),
     );

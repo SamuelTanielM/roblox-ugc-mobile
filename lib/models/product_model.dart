@@ -1,7 +1,7 @@
-class Product {
+class ProductPast {
   String name;
   int price;
   String description;
 
-  Product({required this.name, required this.price, required this.description});
+  ProductPast({required this.name, required this.price, required this.description});
 }
