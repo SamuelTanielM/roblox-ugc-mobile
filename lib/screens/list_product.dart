@@ -5,6 +5,7 @@ import 'package:roblox_ugc/models/product.dart';
 import 'package:roblox_ugc/models/product_model.dart';
 import 'package:roblox_ugc/widgets/left_drawer.dart';
 import 'package:roblox_ugc/screens/product_list.dart';
+import 'package:roblox_ugc/screens/detail_product.dart';
 
 class ProductPage extends StatefulWidget {
     const ProductPage({Key? key}) : super(key: key);
@@ -16,8 +17,12 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
 Future<List<Product>> fetchProduct() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+    
     var url = Uri.parse(
-        'http://samuel-taniel-tugas.pbp.cs.ui.ac.id/json/');
+        // 'https://samuel-taniel-tugas.pbp.cs.ui.ac.id/json/'
+        // "http://127.0.0.1:8000/json_user/"
+        "http://127.0.0.1:8000/json/"
+        );
     var response = await http.get(
         url,
         headers: {"Content-Type": "application/json"},
@@ -66,29 +71,42 @@ Widget build(BuildContext context) {
                 } else {
                     return ListView.builder(
                         itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) => Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 12),
-                                padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                    Text(
-                                    "${snapshot.data![index].fields.name}",
-                                    style: const TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
+                        itemBuilder: (_, index) => GestureDetector(
+                                onTap: () {
+                                  // Navigate to the detail item page
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailItemPage(
+                                        product: snapshot.data![index],
+                                      ),
                                     ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text("${snapshot.data![index].fields.price}"),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                        "${snapshot.data![index].fields.description}")
-                                ],
-                                ),
-                            ));
+                                  );
+                                },
+                        
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 12),
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                      Text(
+                                      "${snapshot.data![index].fields.name}",
+                                      style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                      ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text("${snapshot.data![index].fields.price}"),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                          "${snapshot.data![index].fields.description}")
+                                  ],
+                                  ),
+                            )));
                     }
                 }
             }));

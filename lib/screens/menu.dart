@@ -32,8 +32,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
     Widget build(BuildContext context) {
+      //NOTE:TODO:>:
         return Scaffold(
-          
+          //NOTE:TODO:>:
           appBar: AppBar(
             title: const Text(
               'Shopping List',
@@ -43,8 +44,10 @@ class MyHomePage extends StatelessWidget {
           ),
           // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
           drawer: LeftDrawer(productList : productList),
+          //NOTE:TODO:>:
           body: SingleChildScrollView(
             // Widget wrapper yang dapat discroll
+            //NOTE:TODO:>:
             child: Padding(
               padding: const EdgeInsets.all(10.0), // Set padding dari halaman
               child: Column(
@@ -102,12 +105,14 @@ class ShopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: item.warna,
+      //NOTE:TODO:>:
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
           // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
+            //NOTE:TODO:>:
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
 
@@ -117,11 +122,11 @@ class ShopCard extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ShopFormPage(productList: productList)));
             }
 
-            if (item.name == "Lihat Produk") {
-            // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
-            Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
-            }
+            // if (item.name == "Lihat Produk") {
+            // // NOTE: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            // Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => ProductList(productList: productList),));
+            // }
             else if (item.name == "Lihat Produk") {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ProductPage()));
@@ -134,6 +139,7 @@ class ShopCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //NOTE:TODO:>:
                 Icon(
                   item.icon,
                   color: Colors.white,
